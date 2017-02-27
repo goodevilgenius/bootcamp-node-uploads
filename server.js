@@ -44,6 +44,8 @@ app.post('/image-upload', upload.single('image'), function(req, res) {
 
   // We're storing to a temp directory. Also, multer gives the file a weird name, so we'll restore the original name
   // Using mv instead of fs.rename because fs.rename doesn't work between file systems, so this won't work properly on heroku
+  // If using heroku, you would probably do something completely different, since files won't persist on heroku.
+  // On heroku, here, you would probably upload the files to a CDN and store the URLs in your database.
   var newFile = path.join(__dirname, 'public/uploads/images', req.file.originalname);
   mv(req.file.path, newFile, function(err) {
     if (err) {
