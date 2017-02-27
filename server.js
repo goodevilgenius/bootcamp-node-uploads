@@ -1,5 +1,6 @@
 var path = require('path');
 var fs = require('fs');
+var mv = require('mv');
 var express = require("express");
 var exphbs = require("express-handlebars");
 
@@ -42,8 +43,9 @@ app.post('/image-upload', upload.single('image'), function(req, res) {
   console.log(req.file);
 
   // We're storing to a temp directory. Also, multer gives the file a weird name, so we'll restore the original name
+  // Using mv instead of fs.rename because fs.rename doesn't work between file systems, so this won't work properly on heroku
   var newFile = path.join(__dirname, 'public/uploads/images', req.file.originalname);
-  fs.rename(req.file.path, newFile, function(err) {
+  mv(req.file.path, newFile, function(err) {
     if (err) {
       throw err;
     }
