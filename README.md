@@ -10,4 +10,6 @@ Most of the relevant code is in [our server file](server.js). All relevant code 
 
 The client-side code to make the AJAX upload work is in [`simple-upload.js`](public/assets/js/simple-upload.js).
 
+`/dropzone-upload` is similar to `/ajax-upload` except it uses a third-party library, [Dropzone](http://www.dropzonejs.com/) to handle setting up the AJAX upload. It uses the same route to receive the file.
+
 In this example, I copied the files to the `/public` folder. You may want to find some other solution if using heroku, such as uploading to a CDN. I've found that files kept in `/public` won't persist between builds on heroku, so that every time you `git push heroku master`, you'll lose all of your uploaded files.

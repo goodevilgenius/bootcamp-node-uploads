@@ -40,10 +40,15 @@ app.get('/ajax-upload', function(req, res) {
     res.render('ajax');
 })
 
+app.get('/dropzone-upload', function(req, res) {
+    res.render('dropzone');
+})
+
 // upload.single('image') acts as a middleware function for this route.
 // It parses the form data, and looks for a file upload that was given as <input type="file" name="image">.
 // The parameter passed to single must match the name specified in the input field, in this case "image".
 app.post('/image-upload', upload.single('image'), function(req, res) {
+    console.log(req.body);
   console.log(req.file);
 
   // We're storing to a temp directory. Also, multer gives the file a weird name, so we'll restore the original name

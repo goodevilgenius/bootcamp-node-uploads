@@ -1,7 +1,9 @@
 <form method="post" enctype="multipart/form-data" action="/image-upload">
+  <input type="hidden" name="username" value="nobody">
     <input type="file" name="image">
     <input type="submit">
 </form>
 
 <p><a href="/ajax-upload">Upload via AJAX</a></p>
+<p><a href="/dropzone-upload">Upload via AJAX with Dropzone</a></p>
 <p><a href="/gallery">View uploaded images</a></p>
