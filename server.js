@@ -36,6 +36,10 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/ajax-upload', function(req, res) {
+    res.render('ajax');
+})
+
 // upload.single('image') acts as a middleware function for this route.
 // It parses the form data, and looks for a file upload that was given as <input type="file" name="image">.
 // The parameter passed to single must match the name specified in the input field, in this case "image".
@@ -54,6 +58,20 @@ app.post('/image-upload', upload.single('image'), function(req, res) {
     console.log('Moved ' + req.file.filename + ' to ' + newFile);
     res.redirect('/');
   })
+});
+
+app.post('/ajax-image-upload', upload.single('image'), function(req, res) {
+
+    console.log(req.file);
+
+    var newFile = path.join(__dirname, 'public/uploads/images', req.file.originalname);
+    mv(req.file.path, newFile, function(err) {
+        if (err) {
+            throw err;
+        }
+        console.log('Moved ' + req.file.filename + ' to ' + newFile);
+        res.json({url: '/uploads/images/' + req.file.originalname});
+    })
 });
 
 app.get('/gallery', function(req, res) {

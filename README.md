@@ -6,4 +6,8 @@ The key part of this is the [`multer`](https://github.com/expressjs/multer) midd
 
 Most of the relevant code is in [our server file](server.js). All relevant code is commented, so that it can be understood in context.
 
+`/ajax-upload` has a simple example of uploading via AJAX. The route that receives the upload (`/ajax-image-upload`) is basically identical to the non-AJAX route, but with a `res.json`, rather than a `res.redirect`.
+
+The client-side code to make the AJAX upload work is in [`simple-upload.js`](public/assets/js/simple-upload.js).
+
 In this example, I copied the files to the `/public` folder. You may want to find some other solution if using heroku, such as uploading to a CDN. I've found that files kept in `/public` won't persist between builds on heroku, so that every time you `git push heroku master`, you'll lose all of your uploaded files.
